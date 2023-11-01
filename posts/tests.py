@@ -5,9 +5,6 @@ from rest_framework.test import APITestCase
 
 
 class PostListViewTests(APITestCase):
-    """
-    
-    """
     def setUp(self):
         User.objects.create_user(username='testuser', password='test')
 
@@ -30,10 +27,15 @@ class PostListViewTests(APITestCase):
         response = self.client.post('/posts/', {'title': 'test title'})
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
+
 class PostDetailVewTests(APITestCase):
     def setUp(self):
-        testuser1 = User.objects.create_user(username='testuser1', password='test1')
-        testuser2 = User.objects.create_user(username='testuser2', password='test2')
+        testuser1 = User.objects.create_user(
+            username='testuser1', password='test1'
+            )
+        testuser2 = User.objects.create_user(
+            username='testuser2', password='test2'
+            )
         Post.objects.create(
             owner=testuser1, title='title1', content='test content 1'
         )
