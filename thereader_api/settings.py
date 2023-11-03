@@ -53,10 +53,10 @@ INSTALLED_APPS = [
 
     'profiles',
     'posts',
-    'events',
     'comments',
     'likes',
     'followers',
+    'bookclubevents',
 ]
 
 MIDDLEWARE = [

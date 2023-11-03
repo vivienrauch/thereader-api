@@ -4,9 +4,9 @@ from datetime import date
 from django.utils import timezone
 
 
-class Event(models.Model):
+class BookClubEvent(models.Model):
     """
-    Event model, related to 'owner', i.e. a User instance.
+    BookClubEvent model, related to 'owner', i.e. a User instance.
     Default image set so that we can always reference image.url.
     """
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
