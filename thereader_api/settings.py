@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'followers',
     'bookofthemonth',
     'bookclubevents',
+    'responses',
 ]
 
 MIDDLEWARE = [
