@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     'comments',
     'likes',
     'followers',
-    'bookclubevents',
     'bookofthemonth',
 ]
 
