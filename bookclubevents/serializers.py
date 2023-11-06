@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import BookClubEvent
+from responses.models import Response
 
 
 class BookClubEventSerializer(serializers.ModelSerializer):
@@ -10,6 +11,8 @@ class BookClubEventSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(sosurce='owner.profile.image.url')
+    response_id = serializers.SerializerMethodField()
+    response_count = serializers.ReadOnlyField()
 
     def validate_image(self, value):
         if value.size > 1024 * 1024 * 2:
@@ -30,3 +33,18 @@ class BookClubEventSerializer(serializers.ModelSerializer):
         request = self.context['request']
         return request.user == obj.owner
     
+    def get_response_id(self, obj):
+        user = self.context['request'].user
+        if user.is_authenticated:
+            response = Response.objects.filter(
+                owner=user, bookclubevent=obj
+            ).first()
+            return response.id if response else None
+        return None
+
+    class Meta:
+        model = BookClubEvent
+        fields = [
+            'id', 'owner', 'created_at', 'updated_at',
+            'event_name', 'event_description',
+        ]
