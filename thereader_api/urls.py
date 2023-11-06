@@ -26,4 +26,5 @@ urlpatterns = [
     path('', include('followers.urls')),
     path('', include('bookofthemonth.urls')),
     path('', include('responses.urls')),
+    path('', include('bookclubevents.urls')),
 ]

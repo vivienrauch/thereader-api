@@ -23,5 +23,5 @@ class ResponseSerializer(serializers.ModelSerializer):
             return super().create(validated_data)
         except IntegrityError:
             raise serializers.ValidationError({
-                'detail': 'duplicate probability'
+                'detail': 'possible duplicate'
             })

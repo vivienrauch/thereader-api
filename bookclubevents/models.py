@@ -15,6 +15,7 @@ class BookClubEvent(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     date = models.DateField(default=date.today)
+    event_organiser = models.CharField(max_length=255, blank=True)
     event_location = models.TextField(blank=True)
     event_start = models.TimeField(default=timezone.now)
     event_end = models.TimeField(default=timezone.now)
