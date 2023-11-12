@@ -32,7 +32,7 @@ class BookClubEventList(generics.ListCreateAPIView):
     ]
 
     def perform_create(self, serializer):
-        serializer.save(onwer=self.request.user)
+        serializer.save(owner=self.request.user)
 
 
 class BookClubEventDetail(generics.RetrieveUpdateDestroyAPIView):

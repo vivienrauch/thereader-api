@@ -12,7 +12,7 @@ class ResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Response
         fields = [
-            'id', 'owner', 'event', 'created_at'
+            'id', 'owner', 'bookclubevent', 'created_at'
         ]
 
     """
