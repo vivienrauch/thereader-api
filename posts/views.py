@@ -6,7 +6,7 @@ from .models import Post
 from .serializers import PostSerializer
 
 
-class PostList(generics.ListAPIView):
+class PostList(generics.ListCreateAPIView):
     """
     Lists all posts or creates a post if logged in.
     The perform_create method associates the post with the logged in user.
@@ -41,7 +41,7 @@ class PostList(generics.ListAPIView):
     ]
 
     def perform_create(self, serializer):
-        serializer.ave(owner=self.request.user)
+        serializer.save(owner=self.request.user)
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     """
