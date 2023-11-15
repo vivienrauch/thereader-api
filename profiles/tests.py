@@ -69,35 +69,35 @@ class ProfileDetailViewTests(APITestCase):
     """
     def test_user_logged_in_can_retrieve_profile(self):
         self.client.login(username='testuser1', password='testpass1')
-        response = self.client.get('/profiles/1')
+        response = self.client.get('/profiles/1/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_user_not_logged_in_can_retrieve_profile(self):
-        response = self.client.get('/profiles/1')
+        response = self.client.get('/profiles/1/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     """
     Testing that only logged in users can update their own profile.
     """
     def test_user_not_logged_in_cant_update_profile(self):
-        response = self.client.put('/profiles/1', {'name': 'another name'})
+        response = self.client.put('/profiles/1/', {'name': 'another name'})
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_user_logged_in_can_update_profile(self):
         self.client.login(username='testuser1', password='testpass1')
-        response = self.client.put('/profiles/1')
+        response = self.client.put('/profiles/1/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_user_cant_update_another_users_profile(self):
         self.client.login(username='testuser1', password='testpass1')
-        response = self.client.put('/profiles/2', {'name': 'another name'})
+        response = self.client.put('/profiles/2/', {'name': 'another name'})
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     """
     Testing that a non-existent profile can't be retrieved.
     """
     def test_cant_retrieve_profile_using_invalid_id(self):
-        response = self.client.get('/profiles/123')
+        response = self.client.get('/profiles/123/')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     
