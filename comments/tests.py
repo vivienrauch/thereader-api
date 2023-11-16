@@ -6,6 +6,14 @@ from posts.models import Post
 
 
 class CommentViewTests(APITestCase):
+
+    """
+    Test that:
+    - only logged in users can create comments
+    - all users can view comment list or retrieve a comment
+    - only logged in users that also own the comment can update or delete it.
+    """
+
     def setUp(self):
         self.user = User.objects.create_user(
             username='testuser', password='test'

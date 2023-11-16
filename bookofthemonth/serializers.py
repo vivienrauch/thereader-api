@@ -9,11 +9,11 @@ class BookOfTheMonthSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 'Image size exceeds 4 MB!'
             )
-        if value.image.width > 1920:
+        if value.width > 1920:
             raise serializers.ValidationError(
                 'Image width exceeds 1920px!'
             )
-        if value.image.height > 1920:
+        if value.height > 1920:
             raise serializers.ValidationError(
                 'Image height exceeds 1920px!'
             )
