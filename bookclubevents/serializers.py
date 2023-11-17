@@ -1,6 +1,14 @@
 from rest_framework import serializers
 from .models import BookClubEvent
 from responses.models import Response
+from datetime import time
+
+
+class CustomizedTimeField(serializers.TimeField):
+    def to_representation(self, value):
+        if value is None:
+            return None
+        return value.strftime('%H:%M:%S')
 
 
 class BookClubEventSerializer(serializers.ModelSerializer):
@@ -11,6 +19,8 @@ class BookClubEventSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     response_id = serializers.SerializerMethodField()
     response_count = serializers.ReadOnlyField()
+    event_start = CustomizedTimeField(default=time.min)
+    event_end = CustomizedTimeField(default=time.min)
 
     def validate_image(self, value):
         if value.size > 1024 * 1024 * 2:
@@ -43,8 +53,8 @@ class BookClubEventSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookClubEvent
         fields = [
-            'id', 'owner', 'created_at', 'updated_at',
-            'event_cover', 'event_name', 'event_description',
+            'id', 'owner', 'created_at', 'updated_at', 'event_start',
+            'event_end', 'event_cover', 'event_name', 'event_description',
             'is_owner', 'date', 'event_start',
             'event_end', 'event_location', 'event_organiser',
             'response_count', 'response_id', 'website',

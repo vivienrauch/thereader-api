@@ -29,7 +29,7 @@ class BookClubEvent(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f'{self.id} {self.name}'
+        return f'{self.id} {self.event_name}'
 
     class Meta:
         ordering = ['-created_at']
