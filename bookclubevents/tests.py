@@ -105,3 +105,26 @@ class BookClubEventDetailViewTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.assertEqual(bookclubevent.event_name, 'Test Event')
+
+    def test_user_logged_in_can_delete_own_book_club_event(self):
+        bookclubevent = BookClubEvent.objects.create(**self.bookclubevent_data)
+        self.client.force_login(self.user)
+        response = self.client.delete(
+            f'/bookclubevents/{bookclubevent.id}/', {'event_name': 'Test Event'}
+            )
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_user_cant_delete_another_users_bookclubevent(self):
+        bookclubevent = BookClubEvent.objects.create(**self.bookclubevent_data)
+        self.client.force_login(self.other_user)
+        response = self.client.delete(
+            f'/bookclubevents/{bookclubevent.id}/', {'event_name': 'Test Event'}
+            )
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_user_not_logged_in_cant_delete_bookclubevent(self):
+        bookclubevent = BookClubEvent.objects.create(**self.bookclubevent_data)
+        response = self.client.delete(
+            f'/bookclubevents/{bookclubevent.id}/', {'event_name': 'Test Event'}
+            )
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
