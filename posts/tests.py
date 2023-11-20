@@ -13,8 +13,6 @@ class PostListViewTests(APITestCase):
         Post.objects.create(owner=testuser, title='test title')
         response = self.client.get('/posts/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        print(response.data)
-        print(len(response.data))
 
     def test_logged_in_user_can_create_post(self):
        self.client.login(username='testuser', password='test')
@@ -62,4 +60,15 @@ class PostDetailVewTests(APITestCase):
     def test_user_cant_update_another_users_post(self):
         self.client.login(username='testuser1', password='test1')
         response = self.client.put('/posts/2/', {'title': 'titleupdate'})
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_user_can_delete_own_post(self):
+        self.client.login(username='testuser1', password='test1')
+        response = self.client.delete('/posts/1/', {'title': 'titleupdate'})
+        post = Post.objects.filter(pk=1).first()
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_user_cant_delete_another_users_post(self):
+        self.client.login(username='testuser1', password='test1')
+        response = self.client.delete('/posts/2/', {'title': 'titleupdate'})
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

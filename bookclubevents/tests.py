@@ -8,7 +8,10 @@ from responses.models import Response
 class BookClubEventListViewTests(APITestCase):
     def setUp(self):
         self.user = User.objects.create_user(
-            username = 'testuser', password = 'test'
+            username='testuser', password='test'
+        )
+        self.other_user = User.objects.create_user(
+            username='otheruser', password='othertest'
         )
 
         self.bookclubevent_data = {
@@ -59,6 +62,21 @@ class BookClubEventListViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.assertEqual(BookClubEvent.objects.count(), 0)
 
+class BookClubEventDetailViewTests(APITestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username='testuser', password='test'
+        )
+        self.other_user = User.objects.create_user(
+            username='otheruser', password='othertest'
+        )
+
+        self.bookclubevent_data = {
+            'event_name': 'Test Event',
+            'event_description': 'Test Description',
+            'owner': self.user
+        }
+
     def test_user_logged_in_can_modify_own_book_club_event(self):
         bookclubevent = BookClubEvent.objects.create(**self.bookclubevent_data)
         self.client.force_login(self.user)
@@ -75,6 +93,15 @@ class BookClubEventListViewTests(APITestCase):
             f'/bookclubevents/{bookclubevent.id}/', {'event_name': 'Edited Event'}
             )
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-
+    
     def test_user_cant_modify_another_users_event(self):
-        
+        self.client.force_login(self.other_user)
+        bookclubevent = BookClubEvent.objects.create(**self.bookclubevent_data)
+        response = self.client.put(
+            f'/bookclubevents/{bookclubevent.id}/',
+            {'event_name': 'Edited Event by otheruser'},
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(bookclubevent.event_name, 'Test Event')
