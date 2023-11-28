@@ -58,5 +58,5 @@ class BookClubEventSerializer(serializers.ModelSerializer):
             'is_owner', 'date', 'event_start',
             'event_end', 'event_location', 'event_organiser',
             'response_count', 'response_id', 'website',
-            'contact'
+            'contact', 'date',
         ]
