@@ -11,7 +11,6 @@ class ProfileListViewTests(APITestCase):
         self.user = User.objects.create_user(
             username='testuser1', password='testpass1'
         )
-        
         self.profile_data = {
             'name': 'Hans Christian Andersen',
             'content': 'Test content',
@@ -37,8 +36,15 @@ class ProfileListViewTests(APITestCase):
         since it's handled by Django signals and not the view.
         """
         self.client.force_authenticate(user=self.user)
-        response = self.client.post('/profiles/', self.profile_data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        response = self.client.post(
+                    '/profiles/',
+                    self.profile_data,
+                    format='json'
+                    )
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_405_METHOD_NOT_ALLOWED
+            )
         self.assertEqual(Profile.objects.count(), 1)
         self.assertEqual(Profile.objects.get().owner, self.user)
 
@@ -99,10 +105,3 @@ class ProfileDetailViewTests(APITestCase):
     def test_cant_retrieve_profile_using_invalid_id(self):
         response = self.client.get('/profiles/123/')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-
-    
-
-    
-
-
-    

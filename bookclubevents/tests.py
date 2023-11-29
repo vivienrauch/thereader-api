@@ -62,6 +62,7 @@ class BookClubEventListViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.assertEqual(BookClubEvent.objects.count(), 0)
 
+
 class BookClubEventDetailViewTests(APITestCase):
     def setUp(self):
         self.user = User.objects.create_user(
@@ -81,7 +82,8 @@ class BookClubEventDetailViewTests(APITestCase):
         bookclubevent = BookClubEvent.objects.create(**self.bookclubevent_data)
         self.client.force_login(self.user)
         response = self.client.put(
-            f'/bookclubevents/{bookclubevent.id}/', {'event_name': 'Edited Event'}
+            f'/bookclubevents/{bookclubevent.id}/',
+            {'event_name': 'Edited Event'}
             )
         bookclubevent.refresh_from_db()
         self.assertEqual(bookclubevent.event_name, 'Edited Event')
@@ -90,10 +92,11 @@ class BookClubEventDetailViewTests(APITestCase):
     def test_user_not_logged_in_cant_modify_book_club_event(self):
         bookclubevent = BookClubEvent.objects.create(**self.bookclubevent_data)
         response = self.client.put(
-            f'/bookclubevents/{bookclubevent.id}/', {'event_name': 'Edited Event'}
+            f'/bookclubevents/{bookclubevent.id}/',
+            {'event_name': 'Edited Event'}
             )
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-    
+
     def test_user_cant_modify_another_users_event(self):
         self.client.force_login(self.other_user)
         bookclubevent = BookClubEvent.objects.create(**self.bookclubevent_data)
@@ -110,7 +113,8 @@ class BookClubEventDetailViewTests(APITestCase):
         bookclubevent = BookClubEvent.objects.create(**self.bookclubevent_data)
         self.client.force_login(self.user)
         response = self.client.delete(
-            f'/bookclubevents/{bookclubevent.id}/', {'event_name': 'Test Event'}
+            f'/bookclubevents/{bookclubevent.id}/',
+            {'event_name': 'Test Event'}
             )
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
@@ -118,13 +122,15 @@ class BookClubEventDetailViewTests(APITestCase):
         bookclubevent = BookClubEvent.objects.create(**self.bookclubevent_data)
         self.client.force_login(self.other_user)
         response = self.client.delete(
-            f'/bookclubevents/{bookclubevent.id}/', {'event_name': 'Test Event'}
+            f'/bookclubevents/{bookclubevent.id}/',
+            {'event_name': 'Test Event'}
             )
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_user_not_logged_in_cant_delete_bookclubevent(self):
         bookclubevent = BookClubEvent.objects.create(**self.bookclubevent_data)
         response = self.client.delete(
-            f'/bookclubevents/{bookclubevent.id}/', {'event_name': 'Test Event'}
+            f'/bookclubevents/{bookclubevent.id}/',
+            {'event_name': 'Test Event'}
             )
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

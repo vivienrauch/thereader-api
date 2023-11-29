@@ -27,13 +27,21 @@ class CommentViewTests(APITestCase):
 
     def test_logged_in_user_can_create_comment(self):
         self.client.login(username='testuser', password='test')
-        response = self.client.post('/comments/', self.comment_data, format='json')
+        response = self.client.post(
+                '/comments/',
+                self.comment_data,
+                format='json'
+                )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Comment.objects.count(), 1)
         self.assertEqual(Comment.objects.get().content, 'Test Comment')
 
     def test_user_not_logged_in_cant_comment(self):
-        response = self.client.post('/comments/', self.comment_data, format='json')
+        response = self.client.post(
+                '/comments/',
+                self.comment_data,
+                format='json'
+                )
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.assertEqual(Comment.objects.count(), 0)
 
@@ -74,7 +82,11 @@ class CommentViewTests(APITestCase):
         )
         self.comment_data = {'post': self.post.id, 'content': 'Edited comment'}
         urlpattern = f'/comments/{self.comment.id}/'
-        response = self.client.put(urlpattern, self.comment_data, format='json')
+        response = self.client.put(
+                urlpattern,
+                self.comment_data,
+                format='json'
+                )
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_not_comment_owner_cant_update_comment(self):
@@ -86,7 +98,11 @@ class CommentViewTests(APITestCase):
         )
         self.client.login(username='otheruser', password='test')
         urlpattern = f'/comments/{self.comment.id}/'
-        response = self.client.put(urlpattern, self.comment_data, format='json')
+        response = self.client.put(
+                urlpattern,
+                self.comment_data,
+                format='json'
+                )
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_logged_in_user_can_delete_comment(self):
@@ -117,5 +133,9 @@ class CommentViewTests(APITestCase):
         )
         self.client.login(username='otheruser', password='test')
         urlpattern = f'/comments/{self.comment.id}/'
-        response = self.client.delete(urlpattern, self.comment_data, format='json')
+        response = self.client.delete(
+                urlpattern,
+                self.comment_data,
+                format='json'
+                )
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

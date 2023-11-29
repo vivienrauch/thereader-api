@@ -31,7 +31,7 @@ class PostList(generics.ListCreateAPIView):
         'owner__username',
         'title'
     ]
-    filterset_fields =[
+    filterset_fields = [
         # user feed
         'owner__followed__owner__profile',
         # user liked posts
@@ -42,6 +42,7 @@ class PostList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     """

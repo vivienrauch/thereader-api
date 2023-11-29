@@ -78,9 +78,14 @@ class LikeDetailView(APITestCase):
         self.client.login(username='testuser', password='test')
         response = self.client.post('/likes/', self.like_data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        
-        response_duplicate = self.client.post('/likes/1/', self.like_data, format='json')
-        self.assertEqual(response_duplicate.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        response_duplicate = self.client.post(
+            '/likes/1/',
+            self.like_data,
+            format='json'
+            )
+        self.assertEqual(
+            response_duplicate.status_code,
+            status.HTTP_405_METHOD_NOT_ALLOWED)
         self.assertEqual(Like.objects.count(), 1)
 
     """
@@ -88,10 +93,21 @@ class LikeDetailView(APITestCase):
     """
     def test_user_logged_in_can_delete_own_like(self):
         self.client.login(username='testuser', password='test')
-        response_like = self.client.post('/likes/', self.like_data, format='json')
+        response_like = self.client.post(
+                '/likes/',
+                self.like_data,
+                format='json'
+                )
         self.assertEqual(response_like.status_code, status.HTTP_201_CREATED)
-        response_delete_like = self.client.delete('/likes/1/', self.like_data, format='json')
-        self.assertEqual(response_delete_like.status_code, status.HTTP_204_NO_CONTENT)
+        response_delete_like = self.client.delete(
+                '/likes/1/',
+                self.like_data,
+                format='json'
+                )
+        self.assertEqual(
+            response_delete_like.status_code,
+            status.HTTP_204_NO_CONTENT
+            )
         self.assertEqual(Like.objects.count(), 0)
 
     """
@@ -99,6 +115,13 @@ class LikeDetailView(APITestCase):
     """
     def test_user_logged_in_cant_delete_other_users_like(self):
         self.client.login(username='testuser', password='test')
-        response_delete_like = self.client.delete('/likes/1/', self.like_data, format='json')
-        self.assertEqual(response_delete_like.status_code, status.HTTP_404_NOT_FOUND)
+        response_delete_like = self.client.delete(
+                    '/likes/1/',
+                    self.like_data,
+                    format='json'
+                    )
+        self.assertEqual(
+            response_delete_like.status_code,
+            status.HTTP_404_NOT_FOUND
+            )
         self.assertEqual(Like.objects.count(), 0)

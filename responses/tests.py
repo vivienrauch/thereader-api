@@ -29,7 +29,7 @@ class ResponseListViewTests(APITestCase):
     def test_user_not_logged_in_can_view_responses(self):
         response = self.client.get('/responses/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-    
+
     """
     Test that only logged in users can create a response.
     """
@@ -114,11 +114,17 @@ class ResponseDetailViewTests(APITestCase):
     def test_user_logged_in_cant_update_response(self):
         self.client.login(username='testuser1', password='testpass1')
         response = self.client.put('/responses/1/')
-        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_405_METHOD_NOT_ALLOWED
+            )
 
     def test_user_not_logged_in_cant_update_response(self):
         response = self.client.put('/responses/1/')
-        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_405_METHOD_NOT_ALLOWED
+            )
 
     def test_user_logged_in_can_delete_own_response(self):
         self.client.login(username='testuser1', password='testpass1')

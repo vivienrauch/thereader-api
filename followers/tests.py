@@ -5,6 +5,7 @@ from rest_framework import serializers
 from .models import Follower
 from .serializers import FollowerSerializer
 
+
 class FollowerListViewtTests(APITestCase):
     def setUp(self):
         self.user1 = User.objects.create_user(
@@ -75,7 +76,7 @@ class FollowerDetailViewTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Follower.objects.count(), 0)
-    
+
     def test_user_cant_unfollow_if_not_the_one_being_followed(self):
         Follower.objects.create(owner=self.user1, followed=self.user2)
 

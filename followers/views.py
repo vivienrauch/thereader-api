@@ -19,7 +19,9 @@ class FollowerList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         followed_user = serializer.validated_data['followed']
         if followed_user == self.request.user:
-            raise serializers.ValidationError("Sorry! You can't follow yourself.")
+            raise serializers.ValidationError(
+                "Sorry! You can't follow yourself."
+                )
         serializer.save(owner=self.request.user)
 
 
