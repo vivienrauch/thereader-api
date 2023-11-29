@@ -4,21 +4,25 @@
 
 I tested the functionality with unit tests with each app, they all pass.
 
-- ![bookclubevents tests](bookclubevents/tests.py)
+- [bookclubevents tests](bookclubevents/tests.py)
 
-- ![bookofthemonth tests](bookofthemonth/tests.py)
+- [bookofthemonth tests](bookofthemonth/tests.py)
 
-- ![comments tests](comments/tests.py)
+- [comments tests](comments/tests.py)
 
-- ![followers tests](followers/tests.py)
+- [followers tests](followers/tests.py)
 
-- ![likes tests](likes/tests.py)
+- [likes tests](likes/tests.py)
 
-- ![posts tests](posts/tests.py)
+- [posts tests](posts/tests.py)
 
-- ![profiles tests](profiles/tests.py)
+- [profiles tests](profiles/tests.py)
 
-- ![responses tests](responses/tests.py)
+- [responses tests](responses/tests.py)
+
+### **Frontend**
+
+I tested the frontend components based on the User stories acceptance criteria. Whenever it doesn't meet it, I indicate that in the documentation, in the bugs section.
 
 ## **Code Validation**
 
