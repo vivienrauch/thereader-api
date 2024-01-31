@@ -13,7 +13,8 @@ class ProfileList(generics.ListAPIView):
     queryset = Profile.objects.annotate(
         posts_count=Count('owner__post', distinct=True),
         followers_count=Count('owner__followed', distinct=True),
-        following_count=Count('owner__following', distinct=True)
+        following_count=Count('owner__following', distinct=True),
+        boocklubevents_count=Count('owner__bookclubevent', distinct=True),
     ).order_by('-created_at')
     serializer_class = ProfileSerializer
     filter_backends = [
@@ -28,6 +29,7 @@ class ProfileList(generics.ListAPIView):
         'posts_count',
         'follower_count',
         'following_count',
+        'bookclubevents_count',
         'owner__following__created_at',
         'owner__followed__created_at'
     ]
@@ -41,6 +43,7 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
     queryset = Profile.objects.annotate(
         posts_count=Count('owner__post', distinct=True),
         followers_count=Count('owner__followed', distinct=True),
-        following_count=Count('owner__following', distinct=True)
+        following_count=Count('owner__following', distinct=True),
+        boocklubevents_count=Count('owner__bookclubevent', distinct=True)
     ).order_by('-created_at')
     serializer_class = ProfileSerializer
