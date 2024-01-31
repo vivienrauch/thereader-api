@@ -16,6 +16,8 @@ class BookClubEventSerializer(serializers.ModelSerializer):
     BookClubEvent serializer
     """
     owner = serializers.ReadOnlyField(source='owner.username')
+    profile_id = serializers.ReadOnlyField(source='owner.profile_id')
+    profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     is_owner = serializers.SerializerMethodField()
     response_id = serializers.SerializerMethodField()
     response_count = serializers.ReadOnlyField()
@@ -58,5 +60,5 @@ class BookClubEventSerializer(serializers.ModelSerializer):
             'is_owner', 'date', 'event_start',
             'event_end', 'event_location', 'event_organiser',
             'response_count', 'response_id', 'website',
-            'contact', 'date',
+            'contact', 'date', 'profile_image', 'profile_id',
         ]
