@@ -23,5 +23,5 @@ class BookOfTheMonthSerializer(serializers.ModelSerializer):
         model = BookOfTheMonth
         fields = [
             'id', 'title', 'content', 'created_at',
-            'updated_at', 'image'
+            'updated_at', 'image', 'website',
         ]
