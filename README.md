@@ -15,14 +15,13 @@ Repo: https://github.com/vivienrauch/thereader
 
 My objective with this community app was to bring those who have reading as a hobby closer together;
 as well as having a functional app that can authenticate, make it possible for users to follow each other,
-make up their own profile, be able to modify it, have some custom features like the book of the month or the book club
-events.
+make up their own profile, be able to modify it, have some custom features like the book of the month or the book club events and the event response.
 
 ## **User Stories**
 
 - [Kanban board] (https://github.com/users/vivienrauch/projects/8/views/1)
 - [User stories] (https://github.com/vivienrauch/thereader-api/issues)
 
-All the features are available: https://github.com/vivienrauch/thereader/blob/main/README.md
+The features detailed are available: https://github.com/vivienrauch/thereader/blob/main/README.md
 
 Testing is available in [TESTING.md](TESTING.md).

@@ -32,7 +32,37 @@ The frontend testing is available [here](https://github.com/vivienrauch/thereade
 
 ## **Code Validation**
 
-- Using the [CI Python Linter](https://pep8ci.herokuapp.com/) I tested all the relevant .py files and they are all passing without error.
+- **Book Club Events**
+
+![flake8bce](docs/flake8_booklclubevents.png)
+
+- **Book Of The Month**
+
+![flake8botm](docs/flake8_bookofthemonth.png)
+
+- **Responses**
+
+![flake8responses](docs/flake8_responses.png)
+
+- **Profiles**
+
+![flake8profiles](docs/flake8_profiles.png)
+
+- **Posts**
+
+![flake8posts](docs/flake8_posts.png)
+
+- **Likes**
+
+![flake8likes](docs/flake8_likes.png)
+
+- **Comments**
+
+![flake8comments](docs/flake8_comments.png)
+
+- **Followers**
+
+![flake8followers](docs/flake8_followers.png)
 
 # **Bugs**
 
