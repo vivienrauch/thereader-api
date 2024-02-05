@@ -1,12 +1,20 @@
 # **Testing**
 
+This page includes the backend testing of the Reader application.
+
 ## **Unit Testing**
 
-I tested the functionality with unit tests with each app, they all pass.
+I tested the functionality with unit tests for each app, they all pass.
+
+### **Custom Models**
 
 - [bookclubevents tests](bookclubevents/tests.py)
 
 - [bookofthemonth tests](bookofthemonth/tests.py)
+
+- [responses tests](responses/tests.py)
+
+### **Basic Models**
 
 - [comments tests](comments/tests.py)
 
@@ -18,11 +26,9 @@ I tested the functionality with unit tests with each app, they all pass.
 
 - [profiles tests](profiles/tests.py)
 
-- [responses tests](responses/tests.py)
-
 ### **Frontend**
 
-I tested the frontend components based on the User stories acceptance criteria. Whenever it doesn't meet it, I indicate that in the documentation, in the bugs section.
+The frontend testing is available [here](https://github.com/vivienrauch/thereader/blob/main/TESTING.md)
 
 ## **Code Validation**
 
@@ -30,10 +36,5 @@ I tested the frontend components based on the User stories acceptance criteria. 
 
 # **Bugs**
 
-# **Fixed and Unfixed Bugs**
-
 - One of the bugs was a missing backslash that was keeping the signin form to render properly. - Fixed
-- My bookofthemonth frontend has problems rendering the content from the backend, I suspect it's because of the IsAdminOrReadOnlyOrUserRetrieve instead of just IsAuthenticatedOrReadOnly, but I'm not sure since it worked in the unit tests. - future feature to be fixed
-- The book club events in the frontend also don't render properly I couldn't figure out why. There is one place in the BookClubEventsPage where the prop should be ...bookclubevent, because I'm mapping through the props, but then the page doesn't render at all. So I left it as ...BookClubEvents and it renders somewhat - future feature to be fixed.
-- The date and time formatting are not corresponding on the Book Club Event - future feature to be fixed
 
