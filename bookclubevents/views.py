@@ -26,6 +26,11 @@ class BookClubEventList(generics.ListCreateAPIView):
         'responses__created_at',
         'owner__followed__owner__profile'
     ]
+    search_fields = [
+        'owner__username',
+        'event_name',
+        'event_description'
+    ]
     filterset_fields = [
         'owner__profile',
         'owner__followed__owner__profile'
