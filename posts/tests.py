@@ -65,7 +65,6 @@ class PostDetailVewTests(APITestCase):
     def test_user_can_delete_own_post(self):
         self.client.login(username='testuser1', password='test1')
         response = self.client.delete('/posts/1/', {'title': 'titleupdate'})
-        post = Post.objects.filter(pk=1).first()
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_user_cant_delete_another_users_post(self):

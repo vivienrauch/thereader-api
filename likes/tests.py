@@ -1,11 +1,8 @@
 from django.contrib.auth.models import User
-from django.db.utils import IntegrityError
 from rest_framework import status
-from rest_framework.test import APITestCase, APIClient
+from rest_framework.test import APITestCase
 from .models import Like
 from posts.models import Post
-from .serializers import LikeSerializer
-from .views import LikeList, LikeDetail
 
 
 class LikeListView(APITestCase):

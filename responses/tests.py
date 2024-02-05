@@ -3,7 +3,6 @@ from rest_framework import status
 from django.contrib.auth.models import User
 from .models import Response
 from bookclubevents.models import BookClubEvent
-from .serializers import ResponseSerializer
 
 
 class ResponseListViewTests(APITestCase):

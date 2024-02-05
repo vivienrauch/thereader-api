@@ -10,4 +10,5 @@ class BookOfTheMonthAdmin(admin.ModelAdmin):
     def __str__(self):
         return f'{self.title}'
 
+
 admin.site.register(BookOfTheMonth, BookOfTheMonthAdmin)

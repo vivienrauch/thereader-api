@@ -2,7 +2,6 @@ from rest_framework import generics, permissions
 from thereader_api.permissions import IsOwnerOrReadOnly
 from .models import Follower
 from .serializers import FollowerSerializer
-from django.core.exceptions import ValidationError
 
 
 class FollowerList(generics.ListCreateAPIView):
@@ -17,11 +16,6 @@ class FollowerList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
-        followed_user = serializer.validated_data['followed']
-        if followed_user == self.request.user:
-            raise serializers.ValidationError(
-                "Sorry! You can't follow yourself."
-                )
         serializer.save(owner=self.request.user)
 
 

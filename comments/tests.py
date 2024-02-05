@@ -52,9 +52,16 @@ class CommentViewTests(APITestCase):
         Comment.objects.create(
             post=self.post, owner=self.user, content="Test comment 2"
         )
+        Comment.objects.create(
+            post=self.post, owner=self.user, content="Test comment 3"
+        )
+        Comment.objects.create(
+            post=self.post, owner=self.user, content="Test comment 4"
+        )
+
         response = self.client.get('/comments/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)
+        self.assertEqual(len(response.data), 4)
 
     def test_user_can_retrieve_comment(self):
         comment = Comment.objects.create(
@@ -93,9 +100,6 @@ class CommentViewTests(APITestCase):
         self.comment = Comment.objects.create(
             owner=self.user, post=self.post, content='Test comment'
         )
-        other_user = User.objects.create_user(
-            username='otheruser', password='test'
-        )
         self.client.login(username='otheruser', password='test')
         urlpattern = f'/comments/{self.comment.id}/'
         response = self.client.put(
@@ -127,9 +131,6 @@ class CommentViewTests(APITestCase):
     def test_not_comment_owner_cant_delete_comment(self):
         self.comment = Comment.objects.create(
             owner=self.user, post=self.post, content='Test comment'
-        )
-        other_user = User.objects.create_user(
-            username='otheruser', password='test'
         )
         self.client.login(username='otheruser', password='test')
         urlpattern = f'/comments/{self.comment.id}/'
