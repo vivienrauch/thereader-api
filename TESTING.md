@@ -32,6 +32,8 @@ The frontend testing is available [here](https://github.com/vivienrauch/thereade
 
 ## **Code Validation**
 
+### Python validation using Flake8
+
 - **Book Club Events**
 
 ![flake8bce](docs/flake8_booklclubevents.png)
@@ -66,5 +68,5 @@ The frontend testing is available [here](https://github.com/vivienrauch/thereade
 
 # **Bugs**
 
-- One of the bugs was a missing backslash that was keeping the signin form to render properly. - Fixed
+- Fixed: One of the bugs was a missing backslash that was keeping the signin form to render properly.
 
